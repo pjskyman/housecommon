@@ -1,6 +1,6 @@
 package sky.housecommon;
 
-public class InstantaneousConsumption
+public class InstantaneousConsumption implements Timed,Comparable<InstantaneousConsumption>
 {
     private final long time;
     private final PricingPeriod pricingPeriod;
@@ -274,5 +274,33 @@ public class InstantaneousConsumption
                + "\r\n\t\""+consumer10Name+"\"="+consumer10Consumption+" W,"
                + "\r\n\ttotalOfConsumptions="+getTotalOfConsumptions()+" W"
                + "\r\n}";
+    }
+
+    public int compareTo(InstantaneousConsumption o)
+    {
+        return Long.compare(time,o.time);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash=7;
+        hash=31*hash+(int)(this.time^(this.time>>>32));
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if(this==obj)
+            return true;
+        if(obj==null)
+            return false;
+        if(getClass()!=obj.getClass())
+            return false;
+        final InstantaneousConsumption other=(InstantaneousConsumption)obj;
+        if(this.time!=other.time)
+            return false;
+        return true;
     }
 }

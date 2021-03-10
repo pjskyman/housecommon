@@ -1,6 +1,6 @@
 package sky.housecommon;
 
-public class Temperature
+public class Temperature implements Timed,Comparable<Temperature>
 {
     private final long time;
     private final double temperature;
@@ -40,5 +40,33 @@ public class Temperature
     public boolean isHeaterOn()
     {
         return heaterOn;
+    }
+
+    public int compareTo(Temperature o)
+    {
+        return Long.compare(time,o.time);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash=3;
+        hash=23*hash+(int)(this.time^(this.time>>>32));
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if(this==obj)
+            return true;
+        if(obj==null)
+            return false;
+        if(getClass()!=obj.getClass())
+            return false;
+        final Temperature other=(Temperature)obj;
+        if(this.time!=other.time)
+            return false;
+        return true;
     }
 }
