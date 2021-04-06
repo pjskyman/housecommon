@@ -44,24 +44,24 @@ public class ElectricityUtils
             }
     }
 
-    public static EnergyConsumption calculateEnergyConsumption(int year)
+    public static EnergyConsumption calculateEnergyConsumptionFor(int year)
     {
-        return calculateEnergyConsumption(Database.getInstantaneousConsumptions(year));
+        return calculateEnergyConsumption(Database.getInstantaneousConsumptionsFor(year));
     }
 
-    public static EnergyConsumption calculateEnergyConsumption(int month,int year)
+    public static EnergyConsumption calculateEnergyConsumptionFor(int month,int year)
     {
-        return calculateEnergyConsumption(Database.getInstantaneousConsumptions(month,year));
+        return calculateEnergyConsumption(Database.getInstantaneousConsumptionsFor(month,year));
     }
 
-    public static EnergyConsumption calculateEnergyConsumption(int day,int month,int year)
+    public static EnergyConsumption calculateEnergyConsumptionFor(int day,int month,int year)
     {
-        return calculateEnergyConsumption(Database.getInstantaneousConsumptions(day,month,year));
+        return calculateEnergyConsumption(Database.getInstantaneousConsumptionsFor(day,month,year));
     }
 
-    public static EnergyConsumption calculateEnergyConsumption(int day1,int month1,int year1,int day2,int month2,int year2)
+    public static EnergyConsumption calculateEnergyConsumptionBetween(int day1,int month1,int year1,int day2,int month2,int year2)
     {
-        return calculateEnergyConsumption(Database.getInstantaneousConsumptions(day1,month1,year1,day2,month2,year2));
+        return calculateEnergyConsumption(Database.getInstantaneousConsumptionsBetween(day1,month1,year1,day2,month2,year2));
     }
 
     public static EnergyConsumption calculateEnergyConsumption(List<InstantaneousConsumption> instantaneousConsumptions)
@@ -102,24 +102,24 @@ public class ElectricityUtils
                                      instantaneousConsumption.getConsumer10Name(),accumulations[9]/3600d/1000d,prices[9]/3600d/1000d);
     }
 
-    public static OffPeakHourPeriodEfficiency calculateOffPeakHourPeriodEfficiency(int year)
+    public static OffPeakHourPeriodEfficiency calculateOffPeakHourPeriodEfficiencyFor(int year)
     {
-        return calculateOffPeakHourPeriodEfficiency(Database.getInstantaneousConsumptions(year));
+        return calculateOffPeakHourPeriodEfficiency(Database.getInstantaneousConsumptionsFor(year));
     }
 
-    public static OffPeakHourPeriodEfficiency calculateOffPeakHourPeriodEfficiency(int month,int year)
+    public static OffPeakHourPeriodEfficiency calculateOffPeakHourPeriodEfficiencyFor(int month,int year)
     {
-        return calculateOffPeakHourPeriodEfficiency(Database.getInstantaneousConsumptions(month,year));
+        return calculateOffPeakHourPeriodEfficiency(Database.getInstantaneousConsumptionsFor(month,year));
     }
 
-    public static OffPeakHourPeriodEfficiency calculateOffPeakHourPeriodEfficiency(int day,int month,int year)
+    public static OffPeakHourPeriodEfficiency calculateOffPeakHourPeriodEfficiencyFor(int day,int month,int year)
     {
-        return calculateOffPeakHourPeriodEfficiency(Database.getInstantaneousConsumptions(day,month,year));
+        return calculateOffPeakHourPeriodEfficiency(Database.getInstantaneousConsumptionsFor(day,month,year));
     }
 
-    public static OffPeakHourPeriodEfficiency calculateOffPeakHourPeriodEfficiency(int day1,int month1,int year1,int day2,int month2,int year2)
+    public static OffPeakHourPeriodEfficiency calculateOffPeakHourPeriodEfficiencyBetween(int day1,int month1,int year1,int day2,int month2,int year2)
     {
-        return calculateOffPeakHourPeriodEfficiency(Database.getInstantaneousConsumptions(day1,month1,year1,day2,month2,year2));
+        return calculateOffPeakHourPeriodEfficiency(Database.getInstantaneousConsumptionsBetween(day1,month1,year1,day2,month2,year2));
     }
 
     public static OffPeakHourPeriodEfficiency calculateOffPeakHourPeriodEfficiency(List<InstantaneousConsumption> instantaneousConsumptions)

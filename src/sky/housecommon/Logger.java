@@ -19,6 +19,7 @@ import sky.program.Duration;
 public final class Logger
 {
     public static final org.apache.log4j.Logger LOGGER;
+    public static final boolean LOGGER_ACTIVE=true;
 
     static
     {
@@ -40,20 +41,31 @@ public final class Logger
                 }
             };
             layout.setDateFormat(new DateTimeDateFormat(TimeZone.getDefault()),TimeZone.getDefault());
-            tempLogger.addAppender(new DailyRollingFileAppender(layout,"log/log_"+InetAddress.getLocalHost().getHostName()+"_"+System.getProperty("user.name")+"_"+getPID()+".txt","'.'yyyy-MM-dd"));
+            tempLogger.addAppender(new DailyRollingFileAppender(layout,"log/log_"+InetAddress.getLocalHost().getHostName()+"_"+System.getProperty("user.name")+"_"+getPID()+".txt","'.'yyyy-MM-dd")
+            {
+                @Override
+                public void append(LoggingEvent event)
+                {
+                    if(LOGGER_ACTIVE)
+                        super.append(event);
+                    else
+                        System.out.println(event.getRenderedMessage());
+                }
+            });
             tempLogger.setLevel(Level.ALL);
             tempLogger.info("####################################################################################");
             tempLogger.info("Logging is starting");
             tempLogger.info("Log level selected: "+tempLogger.getLevel().toString());
-            try
-            {
-                System.setErr(new LoggerBridge(true));
-                System.setOut(new LoggerBridge(false));
-            }
-            catch(SecurityException e)
-            {
-                tempLogger.error("Unable to redirect the standard output streams into the logger");
-            }
+            if(LOGGER_ACTIVE)
+                try
+                {
+                    System.setErr(new LoggerBridge(true));
+                    System.setOut(new LoggerBridge(false));
+                }
+                catch(SecurityException e)
+                {
+                    tempLogger.error("Unable to redirect the standard output streams into the logger");
+                }
         }
         catch(Throwable t)
         {
